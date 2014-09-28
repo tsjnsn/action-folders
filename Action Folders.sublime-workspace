@@ -1,0 +1,1085 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"b",
+				"Bucket"
+			],
+			[
+				"get",
+				"get_path_from_destination"
+			],
+			[
+				"typ",
+				"type_destinations"
+			],
+			[
+				"extension",
+				"extension_types"
+			],
+			[
+				"num",
+				"number2"
+			],
+			[
+				"numer",
+				"number1"
+			],
+			[
+				"ex",
+				"exclude"
+			],
+			[
+				"cl",
+				"click  (function)"
+			],
+			[
+				"isB",
+				"isButtonStateChanged"
+			],
+			[
+				"y",
+				"y"
+			],
+			[
+				"Displ",
+				"DisplayMode"
+			],
+			[
+				"to",
+				"towerCount"
+			],
+			[
+				"tower",
+				"towerIds"
+			],
+			[
+				"tier",
+				"tierIndeces"
+			],
+			[
+				"ti",
+				"tierIndeces"
+			],
+			[
+				"sq",
+				"squad_setBuilderTiers"
+			],
+			[
+				"c",
+				"checkSize"
+			],
+			[
+				"po",
+				"posStart"
+			],
+			[
+				"str",
+				"stringToStopAt"
+			],
+			[
+				"pos",
+				"posEnd"
+			],
+			[
+				"String",
+				"StringSub"
+			],
+			[
+				"string",
+				"string_parseUntil"
+			],
+			[
+				"bui",
+				"builderId"
+			],
+			[
+				"squad",
+				"squad_addBuilderTowers"
+			],
+			[
+				"List",
+				"List_Count"
+			],
+			[
+				"number",
+				"numberOfRaces"
+			],
+			[
+				"squ",
+				"squad_setBuilderTowers"
+			],
+			[
+				"En",
+				"EnumCounter"
+			],
+			[
+				"back",
+				"background-image"
+			],
+			[
+				"actor",
+				"actor_attack"
+			],
+			[
+				"squad_ac",
+				"squad_actor_melee_attack"
+			],
+			[
+				"ope",
+				"open_template"
+			],
+			[
+				"unit",
+				"unit_model"
+			],
+			[
+				"gene",
+				"generated_xml"
+			],
+			[
+				"miss",
+				"missile_actor"
+			],
+			[
+				"gen",
+				"generated_actors"
+			],
+			[
+				"gener",
+				"generated_actors"
+			],
+			[
+				"data",
+				"data"
+			],
+			[
+				"armo",
+				"armor_type"
+			],
+			[
+				"attr",
+				"attribute_light"
+			],
+			[
+				"ge",
+				"generated_units"
+			],
+			[
+				"UNIT",
+				"UNIT"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Action Folders.sublime-project",
+			"settings":
+			{
+				"buffer_size": 73,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 368.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"edi",
+				"SFTP: Edit Server…"
+			],
+			[
+				"brow",
+				"SFTP: Browse Server…"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"server",
+				"SFTP: Setup Server…"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"HTMLBeautify"
+			],
+			[
+				"elixi",
+				"Set Syntax: Elixir"
+			],
+			[
+				"repl",
+				"SublimeREPL: Elixir"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"can",
+				"Build: Cancel"
+			],
+			[
+				"canc",
+				"Build: Cancel"
+			],
+			[
+				"cance",
+				"Build: Cancel"
+			],
+			[
+				"cancel",
+				"Build: Cancel"
+			],
+			[
+				"cane",
+				"Build: Cancel"
+			],
+			[
+				"cancek",
+				"Package Control: Enable Package"
+			],
+			[
+				"buil",
+				"Build: Cancel"
+			],
+			[
+				"distr",
+				"Toggle Distractoin Free Window Mode"
+			],
+			[
+				"eli",
+				"Set Syntax: Elixir"
+			],
+			[
+				"wo",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wp",
+				"Word Wrap: Toggle"
+			],
+			[
+				"auto",
+				"Set Syntax: AutoHotkey"
+			],
+			[
+				"elixir",
+				"Set Syntax: Elixir"
+			],
+			[
+				"elix",
+				"Set Syntax: Elixir"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"haskel",
+				"Preferences: SublimeHaskell Settings – Default"
+			],
+			[
+				"hask",
+				"SublimeHaskell: Run"
+			],
+			[
+				"haske",
+				"SublimeHaskell: Configure"
+			],
+			[
+				"build",
+				"SublimeHaskell: Build"
+			],
+			[
+				"haskell",
+				"SublimeHaskell: Build"
+			],
+			[
+				"repl h",
+				"SublimeREPL: Haskell"
+			],
+			[
+				"rplh",
+				"SublimeREPL: Haskell"
+			],
+			[
+				"replha",
+				"SublimeREPL: Haskell"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"json",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"jso",
+				"JSON Reindent: reindent file or selection"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"spac",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"nimrod",
+				"Set Syntax: Nimrod"
+			],
+			[
+				"num",
+				"Nimrod: Modules"
+			],
+			[
+				"cancl",
+				"Build: Cancel"
+			],
+			[
+				"ca",
+				"Build: Cancel"
+			],
+			[
+				"bui",
+				"Build: Cancel"
+			],
+			[
+				"repl per",
+				"SublimeREPL: Perl"
+			],
+			[
+				"isntal",
+				"Package Control: Install Package"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			],
+			[
+				"yam",
+				"Set Syntax: YAML"
+			],
+			[
+				"code",
+				"SublimeCodeIntel: Reset"
+			],
+			[
+				"run",
+				"Makefile (arpg): make run"
+			],
+			[
+				"mak",
+				"Makefile (arpg): make run"
+			],
+			[
+				"make",
+				"Makefile (arpg): make run"
+			],
+			[
+				"clean",
+				"Makefile (arpg): make clean"
+			],
+			[
+				"navi",
+				"File Navigator: Open"
+			],
+			[
+				"brows",
+				"Browse Mode..."
+			],
+			[
+				"git add",
+				"Git: Quick Add"
+			],
+			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"ma",
+				"Makefile (arp): make debug"
+			],
+			[
+				"javat",
+				"Javatar: Operations..."
+			],
+			[
+				"jav",
+				"Javatar: Operations..."
+			],
+			[
+				"makl",
+				"Makefile (arp): make run"
+			],
+			[
+				"import",
+				"Snippet: import"
+			],
+			[
+				"comp",
+				"Makefile (arp): make compile"
+			],
+			[
+				"javatar",
+				"Javatar: Browse Commands..."
+			],
+			[
+				"check",
+				"Git: Checkout"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"push",
+				"Git: Push Current Branch"
+			],
+			[
+				"git comm",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Quick Add"
+			],
+			[
+				"git custom",
+				"Git: Custom Command"
+			],
+			[
+				"git command",
+				"Git: Custom Command"
+			],
+			[
+				"git coma",
+				"SublimeGit: Documentation"
+			],
+			[
+				"merg",
+				"Git: Merge"
+			],
+			[
+				"git",
+				"Git: Commit"
+			],
+			[
+				"mer",
+				"Git: Merge"
+			],
+			[
+				"merge",
+				"Git: Merge"
+			],
+			[
+				"fet",
+				"Git: Fetch"
+			],
+			[
+				"remote",
+				"Git: Remote"
+			],
+			[
+				"xml",
+				"Set Syntax: XML"
+			],
+			[
+				"xmp",
+				"Set Syntax: camlp4"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"mark",
+				"Set Syntax: Markdown"
+			],
+			[
+				"inde",
+				"Indent XML"
+			],
+			[
+				"ind",
+				"Indent XML"
+			],
+			[
+				"lint",
+				"SublimeLinter: Disable Linting"
+			],
+			[
+				"bat",
+				"Set Syntax: Batch File"
+			],
+			[
+				"sbt",
+				"SBT: Run"
+			],
+			[
+				"s",
+				"SBT: Compile"
+			]
+		],
+		"width": 496.0
+	},
+	"console":
+	{
+		"height": 487.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Google Drive/Development/action-folders"
+	],
+	"file_history":
+	[
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/D/Google Drive/Development/Breach/git server ip",
+		"/C/Users/Tyler/Downloads/Flat Awesome-1.4.1/Flat Awesome-1.4.1/README.txt",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/sftp_servers/squadtdforums.breachtd.com",
+		"/D/Google Drive/Development/kv/lib/kv.ex",
+		"/D/Google Drive/Development/kv/kv.sublime-project",
+		"/D/Google Drive/Development/elixir-experiments/FileMonitor.ex",
+		"/D/Google Drive/Development/elixir-experiments/8.Modules.ex",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Tyler/Documents/AutoHotkey.ahk",
+		"/C/Users/Tyler/AppData/Local/Programs/cmder_mini/config/settings",
+		"/C/SkinPack/Themes/7/Windows9.theme",
+		"/C/SkinPack/Themes/7/Windows9/Windows9.msstyles",
+		"/C/Users/Tyler/AppData/Local/Temp/redirect-2-10078.htm",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Program Files/AutoHotkey/Installer.ahk",
+		"/c/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/elixir-tmbundle/elixir.sublime-build",
+		"/C/bin/Elixir/bin/elixir.bat",
+		"/C/Program Files/OpenVPN/config/auth.txt",
+		"/C/Program Files/OpenVPN/config/README.txt",
+		"/C/Program Files/OpenVPN/config/Sweden.ovpn",
+		"/C/Program Files/OpenVPN/config/Netherlands.ovpn",
+		"/C/Program Files/OpenVPN/config/US West.ovpn",
+		"/C/Program Files/OpenVPN/config/US California.ovpn",
+		"/C/Program Files/OpenVPN/config/US East.ovpn",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/Elixir/elixir.sublime-build",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/Elixir/package-metadata.json",
+		"/C/bin/Elixir/bin/elixir",
+		"/C/Users/Tyler/AppData/Local/Temp/7zO6182.tmp/elixir.sublime-build",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Installed Packages/Elixir/elixir.sublime-build",
+		"/C/Users/Tyler/AppData/Local/Temp/7zO9BD4.tmp/elixir-mix-test.sublime-build",
+		"/d/Google Drive/Development/GoogleUnitGen.js",
+		"/C/Program Files/AutoHotkey/license.txt",
+		"/D/temp/squadtd/(listfile)",
+		"/d/Google Drive/Development/sc2map-tools/add_listfile.c",
+		"/C/Users/Tyler/Downloads/pa_skyrocket-4.6-BETA1-20140902/recovery/etc/install-cm-recovery.sh",
+		"/C/Users/Tyler/create",
+		"/C/Users/Tyler/AppData/Local/Temp/7zOBEBF.tmp/C++.sublime-build",
+		"/C/Users/Tyler/Downloads/mpqediten64/History.txt",
+		"/d/Google Drive/Development/sc2map-tools/StormLib/makefile.w32",
+		"/C/Program Files (x86)/QuickTime/QuickTime Read Me.htm",
+		"/D/temp/listfile.txt",
+		"/D/temp/listfile2.txt",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/D/Google Drive/Misc/Yggdrasil/players/Player435.dat",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/SublimeHaskell/Settings/SublimeHaskell.sublime-settings",
+		"/C/Users/Tyler/AppData/Roaming/Console/console.xml",
+		"/C/Users/Tyler/z.txt",
+		"/C/Program Files (x86)/Git/etc/bash_profile",
+		"/C/Chocolatey/lib/Console2.2.0.148.20140727/tools/console2/console.xml",
+		"/C/Chocolatey/lib/Console2.2.0.148.20140727/tools/console.xml",
+		"/C/Chocolatey/lib/Console2.2.0.148.20140727/console.xml",
+		"/D/Google Drive/Development/Experiments/Haskell/second.hs",
+		"/D/Google Drive/Development/Experiments/Haskell/first.hs",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/SublimeHaskell.sublime-settings",
+		"/C/Program Files/Sublime Text 3/Packages/Haskell.sublime-package/Haskell.sublime-build",
+		"/C/Users/Tyler/.floorc.json",
+		"/C/Users/Tyler/git/scripts/sort_downloads.pl",
+		"/C/Users/Tyler/git/scripts/sort_downloads.coffee",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Installed Packages/CoffeeScript/CoffeeScript.sublime-build",
+		"/C/Users/Tyler/AppData/Local/Temp/7zO7EB8.tmp/CoffeeScript.sublime-build",
+		"/D/Google Drive/Development/GoogleUnitGen.js",
+		"/C/Users/Tyler/Downloads/Misc/breachtd_stats.json",
+		"/C/Users/Tyler/Downloads/Archives/metro_ui_dock_icon_set_by_dakirby309/proIcons.txt",
+		"/D/Repositories/breachtd/Assets/GoogleFuGen/JSON/GoogleFuBalanceStats.json",
+		"/C/Users/Tyler/Downloads/Misc/jsonStuff.json",
+		"/C/Users/Tyler/Downloads/Misc/GoogleFuBalanceStats.json",
+		"/D/Repositories/breachtd/Assets/GoogleFuGen/JSON/GoogleFuBalanceStats.json.meta",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/JSON.sublime-settings",
+		"/C/Users/Tyler/git/scripts/hello.nimrod",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/Diffy/Diffy.sublime-settings",
+		"/C/Users/Tyler/Downloads/sort.log",
+		"/C/Users/Tyler/.cpanm/work/1406484397.6284/build.log",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/perl.sublime-build",
+		"/D/Repositories/breachtd/Assets/BreachAssets/Scenes/TitleScreen.unity",
+		"/C/Users/Tyler/Documents/BitBucket/breach_td/Assets/BreachAssets/Common/Prefabs/Guardians/Celestial Dominion/Saint/Ariafyl.prefab",
+		"/C/Users/Tyler/Google Drive/Development/Web/randomlanes/index.html",
+		"/C/Users/Tyler/Google Drive/Development/Web/randomlanes/main.css",
+		"/C/Users/Tyler/Google Drive/Development/Web/randomlanes/main.js",
+		"/C/Users/Tyler/git/arpg/.gitignore",
+		"/C/Users/Tyler/Documents/GitHub/arpg/build.gradle",
+		"/C/Users/Tyler/Documents/BitBucket/breach_td/Assets/BreachAssets/Scenes/UnitAssemblyScene/UnitAssemblyScene.unity",
+		"/C/Users/Tyler/git/arpg/README",
+		"/C/Users/Tyler/Downloads/javasounddemo-150249/JavaSoundDemo/src/CapturePlayback.java",
+		"/C/Users/Tyler/Google Drive/School/TCF 112/Movie Notes.txt",
+		"/C/Users/Tyler/Google Drive/School/TCF 112/Film Concepts.txt",
+		"/C/Users/Tyler/Google Drive/School/TCF 112/Film Technology.txt",
+		"/C/Users/Tyler/Google Drive/School/TCF 112/Historical Eras of Film.txt",
+		"/C/Users/Tyler/Google Drive/School/TCF 112/People of Cinema.txt",
+		"/C/Users/Tyler/AppData/Roaming/Skype/My Skype Received Files/UnitInfo.cs",
+		"/C/Users/Tyler/Google Drive/Development/Squad TD/Localization/KR_koKR.txt",
+		"/C/Users/Tyler/Desktop/st/Squadron Tower Defense Forums.htm",
+		"/C/Users/Tyler/Google Drive/Development/Squad TD/Data/Old/Custom Builder Tier Values.txt",
+		"/C/Users/Tyler/Google Drive/Development/Squad TD/Data/Old/uaxboxregsite.txt",
+		"/C/Users/Tyler/Google Drive/Development/Starcraft II/EditorVariables.txt",
+		"/C/Users/Tyler/Google Drive/Development/Starcraft II/UserLogs/Squadron Tower Defense/TriggerDebug.txt",
+		"/C/Users/Tyler/git/arpg/core/src/com/chasmentertainment/arpg/App.java",
+		"/C/Users/Tyler/Google Drive/Sync.txt",
+		"/C/Users/Tyler/git/arpg/core/src/com/chasmentertainment/arpg/PartyMember.java",
+		"/C/Users/Tyler/git/arpg/core/src/com/chasmentertainment/arpg/Shield.java",
+		"/C/Users/Tyler/git/arpg/core/src/com/chasmentertainment/arpg/Warrior.java",
+		"/C/Users/Tyler/git/arpg/core/src/com/chasmentertainment/arpg/Weapon.java",
+		"/C/Users/Tyler/go/src/github.com/quarnster/completion/build/make_log.txt",
+		"/C/Users/Tyler/git/arpg/core/src/com/chasmentertainment/arpg/MainMenuInputProcessor.java",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/C/Windows/system32/http",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/Javatar/README.md",
+		"/C/Users/Tyler/go/src/github.com/quarnster/completion/build/Makefile",
+		"/C/Users/Tyler/git/arpg/core/build.gradle",
+		"/C/Users/Tyler/git/arpg/desktop/build.gradle",
+		"/C/Users/Tyler/git/arpg/build.gradle",
+		"/C/Users/Tyler/git/learn_gradle/build-tutorial.gradle",
+		"/C/Users/Tyler/git/learn_gradle/build.gradle",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/FileBrowser/dired.sublime-settings",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/FileBrowser/Default.sublime-keymap",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/User/CommentSeperatorSnippet.sublime-snippet",
+		"/C/Users/Tyler/git/arpg/Makefile",
+		"/C/Users/Tyler/Downloads/slick/readme.txt",
+		"/C/Users/Tyler/Downloads/dolphin-dc-netplay-4.0-652-x86/Dolphin-x86/cpack_package_description.txt",
+		"/C/Users/Tyler/git/arp/pom.xml",
+		"/C/Users/Tyler/git/arp/src/main/java/com/chasmentertainment/arpg/MouseEvent.java",
+		"/C/Users/Tyler/git/arp/src/main/java/com/chasmentertainment/arpg/MouseEventInterface.java",
+		"/C/Users/Tyler/git/arp/src/main/java/com/chasmentertainment/arpg/MouseButtonState.java",
+		"/C/Users/Tyler/git/arp/Makefile",
+		"/C/Users/Tyler/git/arp/src/main/java/com/chasmentertainment/arpg/CreateParty.java",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/FuzzyFileNav/fuzzy_file_nav.sublime-settings",
+		"/C/Users/Tyler/AppData/Roaming/Sublime Text 3/Packages/codeivate-st/codeivate-st.sublime-settings"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 100.0,
+		"where_history":
+		[
+			"C:\\Users\\Tyler\\git\\arp\\RPG"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"breach-",
+			"forums",
+			"continue",
+			"splas",
+			"blo",
+			"blocjk",
+			"logo",
+			"/",
+			"\\\\",
+			"\"misc\"",
+			"failmsg",
+			"type",
+			"    \"",
+			"menu",
+			"distra",
+			"\",\n",
+			"\"%par%\"",
+			"%1",
+			"\"%1\"",
+			"auto",
+			"),(",
+			"\n    ",
+			"extensions",
+			"        (\"",
+			"=>",
+			"Extra",
+			"Secondary",
+			"Primary",
+			"WARRIOR",
+			"WARRIOR Primary - CooldownLink: WARRIOR_ATTACK\n",
+			"WARRIOR",
+			"Seraphim",
+			"SERAPHIM",
+			"Seraphim",
+			"SERAPHIM",
+			"Seraphim",
+			"abilities",
+			"aria",
+			"serap",
+			"  ",
+			"tga",
+			"Archives",
+			"\";",
+			"asset",
+			"*",
+			"1",
+			"n",
+			"u",
+			"guardian_glacial_hunter",
+			"guardian_gizmortar",
+			"guardian_gearhead",
+			"guardian_gaslight",
+			"guardian_frozen_seer",
+			"guardian_frost_thrall",
+			"guardian_emberlight",
+			"guardian_elohim",
+			"guardian_delta_watch",
+			"guardian_dawnstriker",
+			"s",
+			"guardian_cold_wind_harbringer",
+			"guardian_clobberbot",
+			"guardian_alpha_force",
+			"assetid",
+			"assetID:[\\s|\\S]*(?!>Alpha)",
+			"asset",
+			"Alpha F",
+			"Alpha",
+			"javascript",
+			";",
+			"pegpar",
+			"c\\",
+			"c/",
+			"c\\",
+			"c/",
+			"renam",
+			"exampleTexture",
+			"buttonStates",
+			"buttonDidChangeState",
+			"left",
+			"partyMember",
+			"createParty",
+			"send",
+			"<!--",
+			"BuildAncient",
+			"BuildSoul",
+			"<Behavior",
+			"Behavior",
+			"Grant",
+			"Apply",
+			"Flags",
+			"ValidatorArray",
+			"        <ValidatorArray index=\"0\" value=\"TargetHasTraitAptitude\"/>\n",
+			"<EditorCategories value=\"\"/>",
+			"Aptitude",
+			"IgnoreInEditor",
+			"sylphy",
+			"Ghost",
+			"StringSize",
+			"race",
+			"tier1",
+			"race",
+			"Count()",
+			"Counter",
+			"ii = 0;",
+			"postPlus(ii)",
+			"ii++",
+			"lv_raceIndex",
+			"[0",
+			"race = ghost;",
+			"[0",
+			"i",
+			"lv_raceIndex",
+			"\"12",
+			"12",
+			"???",
+			"12 Zerglings",
+			"Wave01",
+			"render",
+			"ink",
+			"inkin",
+			"taig",
+			"    <InfoArray index=\"Train14\" Time=\"1\">\n        <Button DefaultButtonFace=\"MergeintoKullervo\"/>\n        <Unit value=\"fKullervo\"/>\n    </InfoArray>\n",
+			"FallenAngel",
+			"XXXX",
+			"<AbilArray Link=\"stop\"/>",
+			"Artisan",
+			"Artesian",
+			"Earl"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"%par%",
+			"PartyMember",
+			"CreateParty",
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Action Folders.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 73,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								62
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 373.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git-checkout":
+	{
+		"height": 124.0
+	},
+	"output.git-commit":
+	{
+		"height": 429.0
+	},
+	"output.git-fetch":
+	{
+		"height": 124.0
+	},
+	"output.git-merge":
+	{
+		"height": 124.0
+	},
+	"output.git-push":
+	{
+		"height": 124.0
+	},
+	"output.haskell_error_checker":
+	{
+		"height": 358.0
+	},
+	"output.haskell_sublime_load":
+	{
+		"height": 433.0
+	},
+	"output.sbt":
+	{
+		"height": 443.0
+	},
+	"output.sbt_error":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 122.0
+	},
+	"project": "Action Folders.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\Google Drive\\Development\\elixir-experiments\\FileMonitor.ex"
+			],
+			[
+				"rep",
+				"*REPL* [elixir]"
+			],
+			[
+				"repl",
+				"*REPL* [elixir]"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\Google Drive\\Development\\kv\\kv.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 63.0,
+		"selected_items":
+		[
+			[
+				"",
+				"all:"
+			]
+		],
+		"width": 360.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 220.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
