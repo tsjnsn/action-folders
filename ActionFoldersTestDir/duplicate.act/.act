@@ -1,0 +1,8 @@
+#!/bin/elixir
+
+[file_arg | _] = System.argv()
+
+src_path = Path.expand(file_arg)
+dst_path = Path.rootname(src_path) <> ".duplicate." <> Path.extname(src_path)
+
+File.cp(src_path, dst_path)
