@@ -30,13 +30,13 @@ defmodule ActionFoldersTest do
     assert Path.expand("./ActionFoldersTestDir/testfolder.act/subfolder-no-act/subsubfolder-with-act") in action_folders
   end
   
-  test "file is detected when put in an Action Folder" do
-    assert false
-  end
+  # test "file is detected when put in an Action Folder" do
+  #   assert false
+  # end
   
-  test "action is called on file when placed in an Action Folder" do
-    assert false  
-  end
+  # test "action is called on file when placed in an Action Folder" do
+  #   assert false  
+  # end
   
   test "can call an action" do
     # call action on file

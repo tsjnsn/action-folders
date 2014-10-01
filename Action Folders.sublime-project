@@ -1,4 +1,46 @@
 {
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"mix"
+			],
+			"name": "Mix Run",
+			"windows":
+			{
+				"shell": "%ProgramFiles%\\Git\\bin\\sh.exe"
+			},
+			"working_dir": "$project_path"
+		},
+		{
+			"cmd":
+			[
+				"mix",
+				"test"
+			],
+			"name": "Mix Test",
+			"syntax": "Packages/User/Mix Test.tmLanguage",
+			"windows":
+			{
+				"shell": "%ProgramFiles%\\Git\\bin\\sh.exe"
+			},
+			"working_dir": "$project_path"
+		},
+		{
+			"cmd":
+			[
+				"mix",
+				"compile"
+			],
+			"name": "Mix Compile",
+			"windows":
+			{
+				"shell": "%ProgramFiles%\\Git\\bin\\sh.exe"
+			},
+			"working_dir": "$project_path"
+		}
+	],
 	"folders":
 	[
 		{
@@ -6,36 +48,8 @@
 			"path": "."
 		}
 	],
-  "settings":
-  {
-        "tab_size": 2
-  },
-  "build_systems":
-    [
-      {
-        "working_dir": "$project_path",
-        "name": "Mix Run",
-        "cmd": ["mix"],
-        "windows": {
-          "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
-        }
-      },
-      {
-        "working_dir": "$project_path",
-        "name": "Mix Test",
-        "cmd": ["mix", "test"],
-        "syntax": "Packages/User/Mix Test.tmLanguage",
-        "windows": {
-          "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
-        }
-      },
-      {
-        "working_dir": "$project_path",
-        "name": "Mix Compile",
-        "cmd": ["mix", "compile"],
-        "windows": {
-          "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
-        }
-      }
-    ]
+	"settings":
+	{
+		"tab_size": 2
+	}
 }
