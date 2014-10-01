@@ -27,8 +27,25 @@ defmodule ActionFoldersTest do
     
     action_folders = GenServer.call(actserv, :list_action_folders)
     assert is_list action_folders
-    # assert Enum.any?(action_folders, &(&1 == Path.expand("./ActionFoldersTestDir/testfolder.act/subfolder-no-act/subsubfolder-with-act")))
     assert Path.expand("./ActionFoldersTestDir/testfolder.act/subfolder-no-act/subsubfolder-with-act") in action_folders
+  end
+  
+  test "file is detected when put in an Action Folder" do
+    assert false
+  end
+  
+  test "action is called on file when placed in an Action Folder" do
+    assert false  
+  end
+  
+  test "can call an action" do
+    # call action on file
+    # check if file was changed appropriately
+    assert {:ok, _} = Actions.act_on_file(Path.expand("./ActionFoldersTestDir/sample script.exs"), [Path.expand("./ActionFoldersTestDir/sample.file")])
+  end
+  
+  test "cannot call an action on a non-executable" do
+    assert {:error, _} = Actions.act_on_file(Path.expand("./ActionFoldersTestDir/sample script non-exec.exs"), [Path.expand("./ActionFoldersTestDir/sample.file")])
   end
   
 end

@@ -23,15 +23,19 @@ defmodule ActionFolders do
     end
     
     reply = cond do
-      is_nil(folder) -> {:error, "Path provided was not a valid string"}
-      !File.exists?(folder) -> {:error, "Path provided does not point to a valid location"}
-      !File.dir?(folder) -> {:error, "Path provided is not a directory"}
-      true -> {:ok, folder}
+      is_nil(folder)
+        -> {:error, "Path provided was not a valid string"}
+      !File.exists?(folder)
+        -> {:error, "Path provided does not point to a valid location"}
+      !File.dir?(folder)
+        -> {:error, "Path provided is not a directory"}
+      true
+        -> {:ok, folder}
     end
     
     case reply do
       {:ok, folder} -> {:reply, reply, %{state | :base => folder}}
-      _ -> {:reply, reply, state}
+      _             -> {:reply, reply, state}
     end
   end
 
@@ -69,6 +73,7 @@ defmodule ActionFolders do
   @doc """
   Can call on any directory to get the list of action folders
   Descends subdirectories as well.
+  Returns a list of directories with a file named '.act'
   """
   def get_action_folders(path) do
     path 
@@ -80,4 +85,26 @@ defmodule ActionFolders do
   # def handle_cast({:push, item}) do
   #     {:noreply, [item|state]}
   # end
+end
+
+
+
+defmodule Actions do
+  
+  @doc """
+  Tries to execute a script. If it fails predictably, it
+  will return {:error, reason}
+  """
+  def act_on_file(script, file) do
+    try do
+      case System.cmd(script, file) do
+        {output, 0} -> {:ok, output}
+        {output, err} -> {:error, output, err}
+      end
+    rescue
+      e in ArgumentError -> {:error, e}
+      e in ErlangError -> {:error, e}
+    end
+  end
+  
 end

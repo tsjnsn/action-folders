@@ -14,21 +14,28 @@
     [
       {
         "working_dir": "$project_path",
-        "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
         "name": "Mix Run",
-        "cmd": ["mix"]
+        "cmd": ["mix"],
+        "windows": {
+          "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
+        }
       },
       {
         "working_dir": "$project_path",
-        "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
         "name": "Mix Test",
-        "cmd": ["mix", "test"]
+        "cmd": ["mix", "test"],
+        "syntax": "Packages/User/Mix Test.tmLanguage",
+        "windows": {
+          "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
+        }
       },
       {
         "working_dir": "$project_path",
-        "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
         "name": "Mix Compile",
-        "cmd": ["mix", "compile"]
+        "cmd": ["mix", "compile"],
+        "windows": {
+          "shell": "%ProgramFiles%\\Git\\bin\\sh.exe",
+        }
       }
     ]
 }
