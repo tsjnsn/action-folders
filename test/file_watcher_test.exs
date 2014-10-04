@@ -5,6 +5,7 @@ defmodule FileWatcherTest do
   @tmp "ActionFoldersTestDir/testfolder.act/temp"
   
   setup_all do
+    # remove temporary directories, and also remake the structure
     File.rm_rf(@tmp)
     File.mkdir(@tmp)
   end
@@ -23,6 +24,7 @@ defmodule FileWatcherTest do
     callback = fn new_files -> send(parent, new_files) end
     {:ok, reply} = GenServer.call(watcher, {:watch_folder, @tmp, callback})
     
+    # creates a file path using the current timestamp and sequence number provided
     create_file = fn seq -> Path.join([@tmp, inspect(:erlang.now())]) <> " #{seq}" end
     
     File.touch( create_file.(3) )

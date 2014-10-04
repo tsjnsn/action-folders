@@ -1,10 +1,17 @@
 defmodule FileWatcher do
   use GenServer
   
+  @doc """
+  Starts the FileWatcher server as initially containing no watched folders
+  """
   def init(args) do
     {:ok, []}
   end
   
+  @doc """
+  Adds a folder to the list of folders being watched, with a callback
+  that executes on added files
+  """
   def handle_call({:watch_folder, folder_path, _callback}, _from, state) do
     monitor_pid = spawn fn ->
       parent = self()
@@ -25,12 +32,15 @@ defmodule FileWatcher do
     monitor_folder(folder_path, _callback)
   end
   
+  @doc """
+  Watches a single directory for additional files every 0.5s
+  """
   def watch_folder(parent, folder_path) do
     {:ok, files} = File.ls(folder_path)
     _watch_folder(parent, folder_path, files)
   end
   
-  def _watch_folder(parent, folder_path, old_files) do
+  defp _watch_folder(parent, folder_path, old_files) do
     {:ok, files} = File.ls(folder_path)
     
     new_files = Enum.filter(files, &(!(&1 in old_files)))
@@ -41,4 +51,5 @@ defmodule FileWatcher do
     :timer.sleep 500
     _watch_folder(parent, folder_path, files)
   end
+  
 end
