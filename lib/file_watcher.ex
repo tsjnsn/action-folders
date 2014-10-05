@@ -1,6 +1,8 @@
 defmodule FileWatcher do
   use GenServer
   
+  @folder_rescan_interval 500
+  
   @doc """
   Starts the FileWatcher server as initially containing no watched folders
   """
@@ -48,7 +50,7 @@ defmodule FileWatcher do
       send(parent, new_files)
     end
     
-    :timer.sleep 500
+    :timer.sleep @folder_rescan_interval
     _watch_folder(parent, folder_path, files)
   end
   

@@ -14,6 +14,10 @@ defmodule ActionFolders.Mixfile do
   def application do
     [applications: [:logger]]
   end
+  
+  def run(_) do
+    Mix.shell.info "hello"
+  end
 
   # Dependencies can be Hex packages:
   #

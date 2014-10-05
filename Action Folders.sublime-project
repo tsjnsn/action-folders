@@ -26,9 +26,9 @@
 				"shell": "%ProgramFiles%\\Git\\bin\\sh.exe"
 			},
 			"working_dir": "$project_path",
-      "variant" : [
+      "variants" : [
         { "name": "Run",
-          "cmd": ["mix", "run"]
+          "cmd": ["mix", "run", "-e", "ActionFolders.main"]
         }
       ]
 		},
