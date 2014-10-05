@@ -100,6 +100,24 @@ defmodule Actions do
   will return {:error, reason}
   """
   def act_on_file(script, file) do
+    
+    read_script =
+    File.open(script, [:read], fn(script) ->
+      case IO.read(script, :line) do
+        :eof              -> {:error, "EOF encountered"}
+        {:error, reason}  -> {:error, reason}
+        data              -> {:ok, data}
+      end
+    end)
+    
+    case read_script do
+      {:ok, line} ->
+        if    (String.starts_with?(line, "#!")) do {:ok, :bash}
+        else  {:error, "stuff"}
+        end
+      {:error, reason} -> {:error, reason} 
+    end
+    
     try do
       case System.cmd(script, file) do
         {output, 0} -> {:ok, output}
