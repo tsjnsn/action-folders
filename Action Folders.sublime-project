@@ -28,7 +28,7 @@
 			"working_dir": "$project_path",
       "variants" : [
         { "name": "Run",
-          "cmd": ["mix", "run", "-e", "ActionFolders.main"]
+          "cmd": ["mix", "run", "lib/main.exs"]
         }
       ]
 		},

@@ -1,10 +1,6 @@
 defmodule ActionFolders do
   use GenServer
 
-  def main do
-    IO.puts("HELLO")
-  end
-
   @doc """
   Initialize the ActionFolders GenServer with the default values
   """
