@@ -12,11 +12,13 @@ defmodule ActionFolders.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger],
+     mod: {ActionFolders, []}
+    ]
   end
   
   def run(_) do
-    Mix.shell.info "hello"
+    # Mix.shell.info "hello"
   end
 
   # Dependencies can be Hex packages:
