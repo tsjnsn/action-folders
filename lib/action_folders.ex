@@ -17,9 +17,10 @@ defmodule AF.Supervisor do
   
   def init(:ok) do
     children = [
-      worker(GenServer, [@af_name, [name: @af_name]])
+      worker(AF.Server, [[name: @af_name]])
     ]
     
+    IO.puts "Starting supervision on #{@af_name}"
     supervise(children, strategy: :one_for_one)
   end
 end

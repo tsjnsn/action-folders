@@ -27,13 +27,10 @@ defmodule FileWatcherTest do
     # creates a file path using the current timestamp and sequence number provided
     create_file = fn seq -> Path.join([@tmp, inspect(:erlang.now())]) <> " #{seq}" end
     
+    File.touch( create_file.(2) )
+    receive_files_changed_sync()
+    
     File.touch( create_file.(3) )
-    receive_files_changed_sync()
-    
-    File.touch( create_file.(4) )
-    receive_files_changed_sync()
-    
-    File.touch( create_file.(5) )
     receive_files_changed_sync()
     
     Process.exit(reply.monitor, :kill)
@@ -49,7 +46,7 @@ defmodule FileWatcherTest do
   def receive_files_changed_sync() do
     receive do
       new_files ->
-        IO.puts "\nNew files noticed: " <> inspect(new_files)
+        # IO.puts "\nNew files noticed: " <> inspect(new_files)
         new_files
     after
       1_000 -> nil
@@ -67,9 +64,6 @@ defmodule FileWatcherTest do
     receive_files_changed_sync()
     
     File.touch( create_file.(1) )
-    receive_files_changed_sync()
-    
-    File.touch( create_file.(2) )
     receive_files_changed_sync()
     
     Process.exit(pid, :kill)
