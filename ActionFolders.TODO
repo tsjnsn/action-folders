@@ -1,3 +1,6 @@
 Action Folders:
-  ☐ Add an entry point for the application
-  ☐ Recursive/Non folder adding
+  ✔ Add an entry point for the application @done (14-10-12 23:58)
+  ✔ Recursive/Non folder adding @done (14-10-12 23:58)
+ ☐ Call actions on folders that are being watched
+ ☐ Add recursive support for FileWatcher
+ ☐ Figure out the proper way to initialize a program

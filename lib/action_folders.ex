@@ -2,7 +2,11 @@ defmodule ActionFolders do
   use Application
   
   def start(_type, _args) do
-    AF.Supervisor.start_link
+    pid = AF.Supervisor.start_link
+    
+    GenServer.call(AF.Server, {:watch_folder, [path: "ActionFoldersTestDir/testfolder.act"]})
+    
+    pid
   end
 end
 
@@ -17,10 +21,11 @@ defmodule AF.Supervisor do
   
   def init(:ok) do
     children = [
-      worker(AF.Server, [[name: @af_name]])
+      worker(@af_name, [[name: @af_name]])
     ]
     
     IO.puts "Starting supervision on #{@af_name}"
     supervise(children, strategy: :one_for_one)
+    
   end
 end

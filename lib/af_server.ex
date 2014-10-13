@@ -1,18 +1,17 @@
 defmodule AF.Server do
   use GenServer
-
-  @default_name AF.Server
-
-  def start_link(folders \\ [], options \\ []) do
+  
+  def start_link(options \\ []) do
     # TODO: let the user define folders to be added initially
-    GenServer.start_link(__MODULE__, nil, options)
+    GenServer.start_link(__MODULE__, :ok, options)
   end
 
   @doc """
   Initialize the ActionFolders GenServer with the default values
   """
   def init(args) do
-    {:ok, %{:folders => []}}
+    { :ok, watcher } = GenServer.start_link(FileWatcher, nil)
+    {:ok, %{:folders => [], :watcher => watcher} }
   end
 
   @doc """
@@ -24,10 +23,8 @@ defmodule AF.Server do
   """
   def handle_call({:watch_folder, [path: folder_path, flags: flags]}, _from, state) 
   when is_bitstring(folder_path) and is_list(flags) do
-    
-    is_recursive = :recursive in flags
-    
-    reply = cond do
+  
+    status = cond do
       is_nil(folder_path) ->
         {:error, "Path provided was not a valid string"}
       !File.exists?(folder_path) ->
@@ -39,10 +36,27 @@ defmodule AF.Server do
     end
     
     new_folder = AF.Folder.make(folder_path, flags)
+    new_state = %{state | :folders => [new_folder | state.folders] }
     
-    case reply do
-      {:ok} -> {:reply, reply, %{state | :folders => [new_folder | state.folders] }}
-      _     -> {:reply, reply, state}
+    callback = fn new_files ->
+      IO.write "New files found: "; IO.inspect new_files
+      Enum.each(new_files, fn file ->
+        spawn fn ->
+          AF.Actions.act(file)
+        end
+      end)
+    end
+    
+    action_folders = get_action_folders(folder_path, :recursive in flags)
+    
+    Enum.each(action_folders, fn af ->
+      {:ok, reply} = GenServer.call(state.watcher, {:watch_folder, af, callback})
+    end)
+    
+    
+    case status do
+      {:ok} -> {:reply, status, new_state}
+      _     -> {:reply, status, state}
     end
   end
   
@@ -104,9 +118,12 @@ defmodule AF.Server do
   Returns a list of directories with a file named '.act'
   """
   def get_action_folders(path, recursive \\ false) do
+    subfolders =
     path 
     |> get_directories(recursive)
     |> List.flatten
+    
+    [path | subfolders]
     |> Enum.filter(&is_action_folder/1)
   end
   

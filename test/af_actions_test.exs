@@ -5,6 +5,7 @@ defmodule AF.ActionsTest do
   @sample_script Path.expand("#{@base_folder}/sample script.exs")
   @sample_script_relative "#{@base_folder}/sample script.exs"
   @sample_file "#{@base_folder}/sample.file"
+  @sample_newfile_in_actionfolder "#{@base_folder}/testfolder.act/add_test.file"
   
   test "can call an action" do
     # call action on file
@@ -16,6 +17,10 @@ defmodule AF.ActionsTest do
     # call action on file
     # check if file was changed appropriately
     assert {:ok, _} = AF.Actions.act_on_file(@sample_script_relative, @sample_file)
+  end
+  
+  test "can call an action just by the name of the file" do
+    assert {:ok, _} = AF.Actions.act(@sample_newfile_in_actionfolder)
   end
   
   # test "cannot call an action on a non-executable" do

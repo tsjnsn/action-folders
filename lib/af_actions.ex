@@ -25,4 +25,10 @@ defmodule AF.Actions do
     end
   end
   
+  def act(file) do
+    script = Path.dirname(file) |> Path.join ".act"
+    IO.puts "Performing action in script #{script} on file #{file}..."
+    act_on_file(script, file)
+  end
+  
 end

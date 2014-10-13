@@ -22,7 +22,7 @@ defmodule FileWatcher do
     end
     # watch_pid = spawn watch_folder(monitor_pid, folder_path)
     reply = {:ok, %{monitor: monitor_pid}}
-    {:reply, reply, state ++ folder_path}
+    {:reply, reply, [folder_path | state]}
   end
   
   defp monitor_folder(folder_path, _callback) do
@@ -47,7 +47,7 @@ defmodule FileWatcher do
     
     new_files = Enum.filter(files, &(!(&1 in old_files)))
     if [] != new_files do
-      send(parent, new_files)
+      send(parent, new_files |> Enum.map(&(Path.join(folder_path,&1))))
     end
     
     :timer.sleep @folder_rescan_interval

@@ -13,13 +13,13 @@ defmodule AF.ServerTest do
   @nonexistant_folder "#{@base_folder}/this/should/not/exist!"
   @sample_file "#{@base_folder}/sample.file"
   
-  test "can't create server with non-existant argument", %{actserv: actserv} do
-    assert {:error, _} = GenServer.call(actserv, {:watch_folder, [path: @nonexistant_folder]})
-  end
+  # test "can't create server with non-existant argument", %{actserv: actserv} do
+  #   assert {:error, _} = GenServer.call(actserv, {:watch_folder, [path: @nonexistant_folder]})
+  # end
   
-  test "can't create server with file argument", %{actserv: actserv} do
-    assert {:error, _} = GenServer.call(actserv, {:watch_folder, [path: @sample_file]})
-  end
+  # test "can't create server with file argument", %{actserv: actserv} do
+  #   assert {:error, _} = GenServer.call(actserv, {:watch_folder, [path: @sample_file]})
+  # end
   
   test "can watch new folder", %{actserv: actserv} do
     assert {:ok} = GenServer.call(actserv, {:watch_folder, [path: @base_folder]})
