@@ -1,0 +1,5 @@
+Action Folders:
+--- Add a way to start the application as a long-running service
++--- Verify application executes correct scripts on files that are added while it is running
++-- Add wrappers for GenServer calls
+- Look at recursion within the FileWatcher

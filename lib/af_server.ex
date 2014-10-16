@@ -14,6 +14,15 @@ defmodule AF.Server do
     {:ok, %{:folders => [], :watcher => watcher} }
   end
 
+  def watch(server, path, recursive \\ false) do
+    flags = [recursive && :recursive]
+    GenServer.call(server, {:watch_folder, path: path, flags: flags})
+  end
+  
+  def list_action_folders(server) do
+    GenServer.call(server, :list_action_folders)
+  end
+
   @doc """
   Set the base folder for the ActionFolders server. It will attempt
   to expand the given path first.
@@ -21,7 +30,7 @@ defmodule AF.Server do
   If successful, returns {:ok, "path/to/folder"}
   otherwise it returns a {:error, "reason"}
   """
-  def handle_call({:watch_folder, [path: folder_path, flags: flags]}, _from, state) 
+  def handle_call({:watch_folder, path: folder_path, flags: flags}, _from, state) 
   when is_bitstring(folder_path) and is_list(flags) do
   
     status = cond do
@@ -58,10 +67,6 @@ defmodule AF.Server do
       {:ok} -> {:reply, status, new_state}
       _     -> {:reply, status, state}
     end
-  end
-  
-  def handle_call({:watch_folder, [path: path]}, _from, state) when is_bitstring(path) do
-    handle_call({:watch_folder, [path: path, flags: []] }, _from, state)
   end
 
   @doc """

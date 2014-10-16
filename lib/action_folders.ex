@@ -4,7 +4,7 @@ defmodule ActionFolders do
   def start(_type, _args) do
     pid = AF.Supervisor.start_link
     
-    GenServer.call(AF.Server, {:watch_folder, [path: "ActionFoldersTestDir/testfolder.act"]})
+    AF.Server.watch AF.Server, "ActionFoldersTestDir/testfolder.act"
     
     pid
   end

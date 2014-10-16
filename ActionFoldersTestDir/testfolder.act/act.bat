@@ -1,1 +1,1 @@
-echo "act" >> $1
+echo "act" >> %1
