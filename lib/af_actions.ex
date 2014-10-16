@@ -26,9 +26,16 @@ defmodule AF.Actions do
   end
   
   def act(file) do
-    script = Path.dirname(file) |> Path.join ".act"
-    IO.puts "Performing action in script #{script} on file #{file}..."
-    act_on_file(script, file)
+    
+    script_name =
+    case :os.type do
+      {:win32, _} -> "act.bat"
+      {:unix, _} -> ".act"
+    end
+    
+    path_to_script = Path.join Path.dirname(file),script_name
+    IO.puts "Performing action in script #{path_to_script} on file #{file}..."
+    act_on_file(path_to_script, file)
   end
   
 end
