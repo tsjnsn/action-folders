@@ -11,7 +11,7 @@ defmodule AF.Server do
   """
   def init(args) do
     { :ok, watcher } = GenServer.start_link(FileWatcher, nil)
-    {:ok, %{:folders => [], :watcher => watcher} }
+    { :ok, %{ :folders => [], :watcher => watcher } }
   end
 
   def watch(server, path, recursive \\ false) do

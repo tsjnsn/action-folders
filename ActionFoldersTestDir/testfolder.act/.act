@@ -1,3 +1,22 @@
-#!/bin/bash
+#!/usr/local/bin/elixir
 
-echo "act" >> $1
+[ filename ] = System.argv
+
+extension = filename |> Path.extname
+
+destinations = %{
+  ~r/\.(txt|doc|docx|pdf|md|markdown)/ => "documents",
+  ~r/\.(mp4|avi|flv|wmv)/ => "videos",
+  ~r/\.(mp3|ogg|wma|flac)/ => "audio",
+  ~r/\.(jpg|jpeg|png|bmp|gif)/ => "images"
+}
+
+targetdest =
+  for {key, val} <- destinations, Regex.match?(key, extension), do: [ val ]
+  |> hd
+
+if targetdest != nil do 
+  File.mkdir(targetdest)
+  :file.rename(filename, Path.join(targetdest, filename))
+end
+
