@@ -25,8 +25,7 @@ defmodule AF.Server do
   @doc """
   Adds a folder to the list of folders currently being monitored.
   """
-  def watch(server, path, command, recursive \\ false) do
-    flags = [recursive && :recursive]
+  def watch(server, path, command, flags) do
     GenServer.call(server, {:watch_folder, path: path, command: command, flags: flags})
   end
   
@@ -58,10 +57,10 @@ defmodule AF.Server do
       end
     end
     
-    action_folders = get_action_folders(folder_path, :recursive in flags)
+    action_folders = get_action_folders(folder_path, flags)
     
     for folder <- action_folders do
-      {:ok, reply} = GenServer.call(state.watcher, {:watch_folder, folder, callback})
+      {:ok, reply} = GenServer.call(state.watcher, {:watch_folder, folder, flags, callback})
     end
     
     {:reply, folder_path, new_state}
@@ -88,31 +87,28 @@ defmodule AF.Server do
   # be nested lists
 
   defp get_directories(path, recursive) when recursive==false do
-    {:ok, files} = File.ls(path)
-    
-    files
-    |> Enum.map(&(Path.join(path,&1))) 
-    |> Enum.filter(&File.dir?/1) 
+    [ path ]
   end
   
   defp get_directories(path, recursive) when recursive==true do
-    get_directories(path, false)
-    |> (fn dirs -> Enum.concat(dirs, Enum.map(dirs, &(get_directories(&1, true)) ) ) end).()
+    here = get_directories(path, false) 
+    
+    subfolders =
+    path
+    |> File.ls!
+    |> Enum.map(&(Path.join(path,&1))) 
+    |> Enum.filter(&File.dir?/1)
+    |> Enum.map(&get_directories(&1, recursive))
+
+    here ++ subfolders
   end
   
   
   @doc """
   Can call on any directory to get the list of action folders
-  Descends subdirectories as well.
-  Returns a list of directories with a file named '.act'
   """
-  def get_action_folders(path, recursive \\ false) do
-    subfolders =
-    path 
-    |> get_directories(recursive)
-    |> List.flatten
-    
-    [path | subfolders]
+  def get_action_folders(path, flags) do
+    get_directories(path, Keyword.fetch!(flags, :recursive))
   end
   
 end

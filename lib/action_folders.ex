@@ -7,7 +7,7 @@ defmodule ActionFolders do
     config = AF.Config.parse_default()
     for fld <- config do
       IO.inspect fld
-      AF.Server.watch(AF.Server, fld.folder, fld.command)
+      AF.Server.watch(AF.Server, fld.folder, fld.command, fld.flags)
     end 
     
     pid

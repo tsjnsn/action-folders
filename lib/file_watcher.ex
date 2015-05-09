@@ -14,13 +14,12 @@ defmodule FileWatcher do
   Adds a folder to the list of folders being watched, with a callback
   that executes on added files
   """
-  def handle_call({:watch_folder, folder_path, _callback}, _from, state) do
+  def handle_call({:watch_folder, folder_path, flags, _callback}, _from, state) do
     monitor_pid = spawn fn ->
       parent = self()
-      spawn fn -> watch_folder(parent, folder_path) end
+      spawn fn -> watch_folder(parent, folder_path, flags) end
       monitor_folder(folder_path, _callback)
     end
-    # watch_pid = spawn watch_folder(monitor_pid, folder_path)
     reply = {:ok, %{monitor: monitor_pid}}
     {:reply, reply, [folder_path | state]}
   end
@@ -34,16 +33,30 @@ defmodule FileWatcher do
     monitor_folder(folder_path, _callback)
   end
   
+
+  def ls(path, flags) do
+    d = Keyword.fetch!(flags, :allow_dir)
+    a = Keyword.fetch!(flags, :allow_hidden)
+
+    {:ok, files} = File.ls(path)
+
+    for file <- files,
+      d == (File.dir?(file |> Path.expand(path))),
+      a == (String.first(Path.basename(file)) == '.') do
+      file
+    end
+  end
+
   @doc """
   Watches a single directory for additional files every 0.5s
   """
-  def watch_folder(parent, folder_path) do
-    {:ok, files} = File.ls(folder_path)
-    _watch_folder(parent, folder_path, files)
+  def watch_folder(parent, folder_path, flags) do
+    files = ls(folder_path, flags)
+    watch_folder(parent, folder_path, files, flags)
   end
   
-  defp _watch_folder(parent, folder_path, old_files) do
-    {:ok, files} = File.ls(folder_path)
+  defp watch_folder(parent, folder_path, old_files, flags) do
+    files = ls(folder_path, flags)
     
     new_files = Enum.filter(files, &(!(&1 in old_files)))
     if [] != new_files do
@@ -51,7 +64,7 @@ defmodule FileWatcher do
     end
     
     :timer.sleep @folder_rescan_interval
-    _watch_folder(parent, folder_path, files)
+    watch_folder(parent, folder_path, files, flags)
   end
   
 end
