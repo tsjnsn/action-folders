@@ -1,4 +1,4 @@
-#!/usr/local/bin/elixir
+#!/usr/bin/env elixir
 
 [ filename ] = System.argv
 

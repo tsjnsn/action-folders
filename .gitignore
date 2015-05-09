@@ -5,3 +5,5 @@ erl_crash.dump
 *.sublime-workspace
 *temp/
 *.swp
+*.beam
+mix.lock

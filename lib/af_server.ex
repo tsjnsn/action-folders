@@ -1,3 +1,11 @@
+defmodule AF.Folder do
+  defstruct path: "", command: "", flags: []
+
+  def recursive?(af) do
+    :recursive in af.flags
+  end
+end
+
 defmodule AF.Server do
   use GenServer
   
@@ -14,11 +22,17 @@ defmodule AF.Server do
     { :ok, %{ :folders => [], :watcher => watcher } }
   end
 
-  def watch(server, path, recursive \\ false) do
+  @doc """
+  Adds a folder to the list of folders currently being monitored.
+  """
+  def watch(server, path, command, recursive \\ false) do
     flags = [recursive && :recursive]
-    GenServer.call(server, {:watch_folder, path: path, flags: flags})
+    GenServer.call(server, {:watch_folder, path: path, command: command, flags: flags})
   end
   
+  @doc """
+  Returns a list of all folders currently being monitored.
+  """
   def list_action_folders(server) do
     GenServer.call(server, :list_action_folders)
   end
@@ -30,43 +44,27 @@ defmodule AF.Server do
   If successful, returns {:ok, "path/to/folder"}
   otherwise it returns a {:error, "reason"}
   """
-  def handle_call({:watch_folder, path: folder_path, flags: flags}, _from, state) 
-  when is_bitstring(folder_path) and is_list(flags) do
+  def handle_call({:watch_folder, path: folder_path, command: command, flags: flags}, _from, state) 
+  do
   
-    status = cond do
-      is_nil(folder_path) ->
-        {:error, "Path provided was not a valid string"}
-      !File.exists?(folder_path) ->
-        {:error, "Path provided does not point to a valid location"}
-      !File.dir?(folder_path) ->
-        {:error, "Path provided is not a directory"}
-      true ->
-        {:ok}
-    end
-    
-    new_folder = AF.Folder.make(folder_path, flags)
+    new_folder = %AF.Folder{path: folder_path, command: command, flags: flags}
     new_state = %{state | :folders => [new_folder | state.folders] }
     
     callback = fn new_files ->
       IO.write "New files found: "; IO.inspect new_files
-      Enum.each(new_files, fn file ->
-        spawn fn ->
-          AF.Actions.act(file)
-        end
-      end)
+      for file <- new_files do
+        spawn fn -> AF.Actions.act(file, command, AF.Config.default_path) end
+        #IO.inspect AF.Actions.act(file, command, AF.Config.default_path)
+      end
     end
     
     action_folders = get_action_folders(folder_path, :recursive in flags)
     
-    Enum.each(action_folders, fn af ->
-      {:ok, reply} = GenServer.call(state.watcher, {:watch_folder, af, callback})
-    end)
-    
-    
-    case status do
-      {:ok} -> {:reply, status, new_state}
-      _     -> {:reply, status, state}
+    for folder <- action_folders do
+      {:ok, reply} = GenServer.call(state.watcher, {:watch_folder, folder, callback})
     end
+    
+    {:reply, folder_path, new_state}
   end
 
   @doc """
@@ -76,7 +74,7 @@ defmodule AF.Server do
   def handle_call(:list_action_folders, _from, state) do
 
     list_af_folders = fn folder -> 
-      get_action_folders(AF.Folder.get_path(folder), AF.Folder.recursive?(folder)) 
+      get_action_folders(folder.path, AF.Folder.recursive?(folder)) 
     end
     
     folders = Enum.map(state.folders, list_af_folders) |> List.flatten
@@ -84,38 +82,24 @@ defmodule AF.Server do
     {:reply, folders, state}
   end
   
-  @doc """
-  If the target folder is an action folder, this returns true
-  """
-  def is_action_folder(folder) do
-    folder |> File.ls |> elem(1) |> Enum.member?(".act")
-  end
-  
-
   # Helper method for get_action_folders. Just lists all folders,
   # including sub folders in a directory.
   # The returned list is not automatically flattened, so there could
   # be nested lists
-  defp _get_directories(path) do
-    path 
-    |> File.ls 
-    |> elem(1) 
+
+  defp get_directories(path, recursive) when recursive==false do
+    {:ok, files} = File.ls(path)
+    
+    files
     |> Enum.map(&(Path.join(path,&1))) 
     |> Enum.filter(&File.dir?/1) 
   end
   
-  defp _get_directories_recursive(path) do
-    path
-    |> get_directories(false)
-    |> (fn dirs -> Enum.concat(dirs, Enum.map(dirs, &_get_directories_recursive/1) ) end).()
+  defp get_directories(path, recursive) when recursive==true do
+    get_directories(path, false)
+    |> (fn dirs -> Enum.concat(dirs, Enum.map(dirs, &(get_directories(&1, true)) ) ) end).()
   end
   
-  defp get_directories(path, recursive \\ false) do
-    case recursive do
-      true  -> _get_directories_recursive(path)
-      false -> _get_directories(path)
-    end
-  end
   
   @doc """
   Can call on any directory to get the list of action folders
@@ -129,26 +113,8 @@ defmodule AF.Server do
     |> List.flatten
     
     [path | subfolders]
-    |> Enum.filter(&is_action_folder/1)
   end
   
 end
 
 
-defmodule AF.Folder do
-  def make(path, flags \\ []) do
-    {path, flags}
-  end
-  
-  def get_path(folder) do
-    elem(folder, 0)
-  end
-  
-  def get_flags(folder) do
-    elem(folder, 1)
-  end
-  
-  def recursive?(folder) do
-    :recursive in get_flags(folder)
-  end
-end

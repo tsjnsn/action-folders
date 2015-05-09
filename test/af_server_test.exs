@@ -22,13 +22,11 @@ defmodule AF.ServerTest do
   # end
   
   test "can watch new folder", %{actserv: actserv} do
-    # assert {:ok} = GenServer.call(actserv, {:watch_folder, [path: @base_folder]})
-    assert {:ok} = AF.Server.watch(actserv, @base_folder)
+    assert @base_folder = AF.Server.watch(actserv, @base_folder, "echo")
   end
   
   test "can get the list of folders which have actions (non-recursive)", %{actserv: actserv} do
-    # assert {:ok} = GenServer.call(actserv, {:watch_folder, [path: @base_folder]})
-    assert {:ok} = AF.Server.watch(actserv, @base_folder)
+    assert @base_folder = AF.Server.watch(actserv, @base_folder, "echo")
     
     action_folders = AF.Server.list_action_folders(actserv)
     assert is_list action_folders
@@ -36,7 +34,7 @@ defmodule AF.ServerTest do
   end
   
   test "can get the list of folders which have actions (recursive)", %{actserv: actserv} do
-    assert {:ok} = AF.Server.watch actserv, @base_folder, true
+    assert @base_folder = AF.Server.watch(actserv, @base_folder, "echo", true)
         
     action_folders = AF.Server.list_action_folders(actserv)
     assert is_list action_folders

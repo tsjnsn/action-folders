@@ -4,7 +4,11 @@ defmodule ActionFolders do
   def start(_type, _args) do
     pid = AF.Supervisor.start_link
     
-    AF.Server.watch AF.Server, "ActionFoldersTestDir/testfolder.act"
+    config = AF.Config.parse_default()
+    for fld <- config do
+      IO.inspect fld
+      AF.Server.watch(AF.Server, fld.folder, fld.command)
+    end 
     
     pid
   end
