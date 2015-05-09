@@ -52,7 +52,7 @@ defmodule AF.Server do
     callback = fn new_files ->
       IO.write "New files found: "; IO.inspect new_files
       for file <- new_files do
-        spawn fn -> AF.Actions.act(file, command, AF.Config.default_path) end
+        spawn fn -> AF.Actions.act(file, command, AF.Config.default_path |> Path.dirname) end
         #IO.inspect AF.Actions.act(file, command, AF.Config.default_path)
       end
     end
