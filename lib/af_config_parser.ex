@@ -63,7 +63,7 @@ defmodule AF.Config do
   end
 
   def default_path() do
-    home = System.get_env("HOME")
+    home = System.user_home!()
     Path.join(home, ".act")
   end
 
