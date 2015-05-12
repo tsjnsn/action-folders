@@ -1,5 +1,5 @@
 defmodule AF.Folder do
-  defstruct path: "", command: "", flags: []
+  defstruct folder: "", command: "", flags: []
 
   def recursive?(af) do
     :recursive in af.flags
@@ -23,8 +23,7 @@ defmodule AF.Server do
 
     { :ok, watcher } = FileWatcher.start_link([])
 
-    folders = Keyword.get(args, :folders, [])
-    
+    folders = Keyword.get(args, :folders, []) 
     for f <- folders do
       :ok = start_watching(watcher, f.folder, f.flags, &on_new_files(&1, f.command) )
     end
@@ -49,7 +48,9 @@ defmodule AF.Server do
   defp on_new_files(files, af) do
     Logger.info "New files found: #{inspect files}"
     for f <- files do
-      spawn fn -> AF.Actions.act(f, af.command, AF.Config.default_path |> Path.dirname) end
+      spawn fn -> 
+        AF.Actions.act(f, af.command, AF.Config.default_path |> Path.dirname)
+      end
     end
   end
 
@@ -68,12 +69,15 @@ defmodule AF.Server do
   If successful, returns {:ok, "path/to/folder"}
   otherwise it returns a {:error, "reason"}
   """
-  def handle_call({:watch_folder, path: folder_path, command: command, flags: flags}, _from, state) 
+  def handle_call({:watch_folder, 
+    path: path,
+    command: command,
+    flags: flags}, _from, state) 
   do
     IO.inspect state
-    :ok = start_watching(state.watcher, folder_path, flags, &on_new_files(&1, command) )
+    :ok = start_watching(state.watcher, path, flags, &on_new_files(&1, command) )
 
-    new_folder = %AF.Folder{path: folder_path, command: command, flags: flags}
+    new_folder = %AF.Folder{folder: path, command: command, flags: flags}
     new_state = %{state | :folders => [new_folder | state.folders] }
     {:reply, folder_path, new_state}
   end
