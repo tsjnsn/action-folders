@@ -8,18 +8,24 @@ end
 
 defmodule AF.Server do
   use GenServer
+  require Logger
   
-  def start_link(options \\ []) do
-    # TODO: let the user define folders to be added initially
-    GenServer.start_link(__MODULE__, :ok, options)
+  def start_link(opts \\ []) do
+    args = opts
+    GenServer.start_link(__MODULE__, args, opts)
   end
 
   @doc """
   Initialize the ActionFolders GenServer with the default values
   """
   def init(args) do
-    { :ok, watcher } = GenServer.start_link(FileWatcher, nil)
-    { :ok, %{ :folders => [], :watcher => watcher } }
+    Logger.debug "AF.Server started with args:\n#{inspect args, [pretty: true]}"
+
+    { :ok, watcher } = FileWatcher.start_link([])
+
+    folders = Keyword.get(args, :folders, [])
+
+    { :ok, %{ :folders => folders, :watcher => watcher } }
   end
 
   @doc """
@@ -45,7 +51,7 @@ defmodule AF.Server do
   """
   def handle_call({:watch_folder, path: folder_path, command: command, flags: flags}, _from, state) 
   do
-  
+    IO.inspect state
     new_folder = %AF.Folder{path: folder_path, command: command, flags: flags}
     new_state = %{state | :folders => [new_folder | state.folders] }
     
@@ -53,14 +59,13 @@ defmodule AF.Server do
       IO.write "New files found: "; IO.inspect new_files
       for file <- new_files do
         spawn fn -> AF.Actions.act(file, command, AF.Config.default_path |> Path.dirname) end
-        #IO.inspect AF.Actions.act(file, command, AF.Config.default_path)
       end
     end
     
     action_folders = get_action_folders(folder_path, flags)
     
     for folder <- action_folders do
-      {:ok, reply} = GenServer.call(state.watcher, {:watch_folder, folder, flags, callback})
+      {:ok, _reply} = FileWatcher.watch_folder(state.watcher, folder, flags, callback)
     end
     
     {:reply, folder_path, new_state}

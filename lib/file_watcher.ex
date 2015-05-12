@@ -6,31 +6,44 @@ defmodule FileWatcher do
   @doc """
   Starts the FileWatcher server as initially containing no watched folders
   """
-  def init(args) do
+  def init(_args) do
     {:ok, []}
   end
   
+  def watch_folder(server, folder_path, flags, callback) do
+    GenServer.call(server, {:watch_folder, folder_path, flags, callback})
+  end
+
   @doc """
   Adds a folder to the list of folders being watched, with a callback
   that executes on added files
   """
-  def handle_call({:watch_folder, folder_path, flags, _callback}, _from, state) do
+  def handle_call({:watch_folder, folder_path, flags, callback}, _from, state) do
     monitor_pid = spawn fn ->
       parent = self()
-      spawn fn -> watch_folder(parent, folder_path, flags) end
-      monitor_folder(folder_path, _callback)
+      spawn fn -> 
+        scan_forever(parent, folder_path, flags) 
+      end
+      wait_for_changes(folder_path, callback)
     end
     reply = {:ok, %{monitor: monitor_pid}}
     {:reply, reply, [folder_path | state]}
   end
-  
-  defp monitor_folder(folder_path, _callback) do
+ 
+  @doc """
+  Convenience method for starting the file watcher
+  """
+  def start_link(state) do
+    GenServer.start_link(__MODULE__, state, [name: :file_watcher]) 
+  end
+
+  defp wait_for_changes(folder_path, callback) do
     receive do
       new_files ->
-        _callback.(new_files)
+        callback.(new_files)
     end
     
-    monitor_folder(folder_path, _callback)
+    wait_for_changes(folder_path, callback)
   end
   
 
@@ -47,15 +60,15 @@ defmodule FileWatcher do
     end
   end
 
-  @doc """
-  Watches a single directory for additional files every 0.5s
-  """
-  def watch_folder(parent, folder_path, flags) do
+  defp scan_forever(parent, folder_path, flags) do
+    # Initial scan of files, so that existing files are considered 'added'
     files = ls(folder_path, flags)
-    watch_folder(parent, folder_path, files, flags)
+
+    # Start the recursion
+    scan_forever(parent, folder_path, files, flags)
   end
-  
-  defp watch_folder(parent, folder_path, old_files, flags) do
+
+  defp scan_forever(parent, folder_path, old_files, flags) do
     files = ls(folder_path, flags)
     
     new_files = Enum.filter(files, &(!(&1 in old_files)))
@@ -64,7 +77,7 @@ defmodule FileWatcher do
     end
     
     :timer.sleep @folder_rescan_interval
-    watch_folder(parent, folder_path, files, flags)
+    scan_forever(parent, folder_path, files, flags)
   end
   
 end

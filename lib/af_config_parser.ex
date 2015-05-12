@@ -8,8 +8,6 @@ end
 
 defmodule AF.Config do
 
-  @command_regex ~r/\s*(?<rule>\S+)\s*("(?<dir>[^"]*)"|(?<dir2>\S*))\s*("(?<cmd>[^"]*)"|(?<cmd2>\S*))\s*/
-
   def parse_file(filename) do
     dir = Path.dirname(filename)
 

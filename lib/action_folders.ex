@@ -2,15 +2,7 @@ defmodule ActionFolders do
   use Application
   
   def start(_type, _args) do
-    pid = AF.Supervisor.start_link
-    
-    config = AF.Config.parse_default()
-    for fld <- config do
-      IO.inspect fld
-      AF.Server.watch(AF.Server, fld.folder, fld.command, fld.flags)
-    end 
-    
-    pid
+    AF.Supervisor.start_link
   end
 end
 
@@ -24,8 +16,10 @@ defmodule AF.Supervisor do
   @af_name AF.Server
   
   def init(:ok) do
+    config = AF.Config.parse_default()
+
     children = [
-      worker(@af_name, [[name: @af_name]])
+      worker(@af_name, [[name: @af_name, folders: config]])
     ]
     
     IO.puts "Starting supervision on #{@af_name}"

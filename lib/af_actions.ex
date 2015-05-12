@@ -7,7 +7,7 @@ defmodule AF.Actions do
   """
   def act(filename, command, cd) do
     fullfilename = filename |> Path.expand
-    
+
     [cmd | cmdargs] = String.split command
     cmdargs = for c <- cmdargs, do: Path.expand(c, cd)
 
