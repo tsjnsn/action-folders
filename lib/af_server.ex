@@ -24,6 +24,10 @@ defmodule AF.Server do
     { :ok, watcher } = FileWatcher.start_link([])
 
     folders = Keyword.get(args, :folders, [])
+    
+    for f <- folders do
+      :ok = start_watching(watcher, f.folder, f.flags, &on_new_files(&1, f.command) )
+    end
 
     { :ok, %{ :folders => folders, :watcher => watcher } }
   end
@@ -42,6 +46,21 @@ defmodule AF.Server do
     GenServer.call(server, :list_action_folders)
   end
 
+  defp on_new_files(files, af) do
+    Logger.info "New files found: #{inspect files}"
+    for f <- files do
+      spawn fn -> AF.Actions.act(f, af.command, AF.Config.default_path |> Path.dirname) end
+    end
+  end
+
+  defp start_watching(watcher, path, flags, callback) do
+    folders = get_action_folders(path, flags)
+    for f <- folders do
+      {:ok, _} = FileWatcher.watch_folder(watcher, f, flags, callback)
+    end
+    :ok
+  end
+
   @doc """
   Set the base folder for the ActionFolders server. It will attempt
   to expand the given path first.
@@ -52,22 +71,10 @@ defmodule AF.Server do
   def handle_call({:watch_folder, path: folder_path, command: command, flags: flags}, _from, state) 
   do
     IO.inspect state
+    :ok = start_watching(state.watcher, folder_path, flags, &on_new_files(&1, command) )
+
     new_folder = %AF.Folder{path: folder_path, command: command, flags: flags}
     new_state = %{state | :folders => [new_folder | state.folders] }
-    
-    callback = fn new_files ->
-      IO.write "New files found: "; IO.inspect new_files
-      for file <- new_files do
-        spawn fn -> AF.Actions.act(file, command, AF.Config.default_path |> Path.dirname) end
-      end
-    end
-    
-    action_folders = get_action_folders(folder_path, flags)
-    
-    for folder <- action_folders do
-      {:ok, _reply} = FileWatcher.watch_folder(state.watcher, folder, flags, callback)
-    end
-    
     {:reply, folder_path, new_state}
   end
 
