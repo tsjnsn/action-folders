@@ -49,7 +49,7 @@ defmodule AF.Server do
     Logger.info "New files found: #{inspect files}"
     for f <- files do
       spawn fn -> 
-        AF.Actions.act(f, af.command, AF.Config.default_path |> Path.dirname)
+        AF.Utils.act(f, af.command, AF.Config.default_path |> Path.dirname)
       end
     end
   end
@@ -79,7 +79,7 @@ defmodule AF.Server do
 
     new_folder = %AF.Folder{folder: path, command: command, flags: flags}
     new_state = %{state | :folders => [new_folder | state.folders] }
-    {:reply, folder_path, new_state}
+    {:reply, path, new_state}
   end
 
   @doc """

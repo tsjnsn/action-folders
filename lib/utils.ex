@@ -1,4 +1,4 @@
-defmodule AF.Actions do
+defmodule AF.Utils do
   
   @doc """
   Takes a filename and determines what script to run, based on the OS.
