@@ -11,7 +11,8 @@ defmodule AF.Supervisor do
     config = AF.Config.parse_default()
 
     children = [
-      worker(AF.Server, [[name: @af_name, folders: config]])
+      worker(FileWatcher, []),
+      worker(AF.Server, [[folders: config]])
     ]
     
     IO.puts "Starting supervision on #{@af_name}"

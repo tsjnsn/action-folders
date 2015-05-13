@@ -25,10 +25,10 @@ defmodule FileWatcherTest do
     parent = self()
     callback_fileischanged = fn new_files -> send(parent, new_files) end
     
-    {:ok, reply} = GenServer.call(watcher, {:watch_folder, @tmp, callback_fileischanged})
+    {:ok, reply} = FileWatcher.watch_folder(watcher, @tmp, [], callback_fileischanged)
     
     # creates a file path using the current timestamp and sequence number provided
-    create_file = fn seq -> Path.join([@tmp, inspect(:erlang.now())]) <> " #{seq}" end
+    create_file = fn seq -> Path.join(@tmp, inspect(:erlang.now())) <> " #{seq}" end
     
     File.touch( create_file.(2) )
     receive_files_changed_sync()
@@ -40,28 +40,11 @@ defmodule FileWatcherTest do
     
   end
   
-  # test "can get list of added files for all folders", %{watcher: watcher} do
-  #   {:ok, _} = GenServer.call(watcher, :watch_folder, @testfolder)
-  #   {:ok, list_watched_folders} = GenServer.call(watcher, :list_watched_folders)
-  #   assert @testfolder in list_watched_folders
-  # end
-  
-  def receive_files_changed_sync() do
-    receive do
-      new_files ->
-        # IO.puts "\nNew files noticed: " <> inspect(new_files)
-        new_files
-    after
-      1_000 -> nil
-    end
-    |> assert
-  end
-  
   test "can watch a folder" do
     parent = self()
-    pid = spawn fn -> FileWatcher.watch_folder(parent, @tmp) end
+    pid = spawn fn -> FileWatcher.scan_forever(parent, @tmp, []) end
     
-    create_file = fn seq -> Path.join([@tmp, inspect(:erlang.now())]) <> " #{seq}" end
+    create_file = fn seq -> Path.join(@tmp, inspect(:erlang.now())) <> " #{seq}" end
     
     File.touch( create_file.(0) )
     receive_files_changed_sync()
@@ -71,5 +54,16 @@ defmodule FileWatcherTest do
     
     Process.exit(pid, :kill)
   end
+
   
+  defp receive_files_changed_sync() do
+    receive do
+      new_files ->
+        new_files
+    after
+      1_000 -> nil
+    end
+    |> assert
+  end
+
 end

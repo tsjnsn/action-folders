@@ -1,18 +1,20 @@
 defmodule AF.Folder do
-  defstruct folder: "", command: "", flags: []
+  defstruct folder: "", command: "", args: [], flags: [recursive: false, 
+    allow_dirs: false, allow_hidden: false]
 
   def recursive?(af) do
-    :recursive in af.flags
+    Keyword.get(af.flags, :recursive, false)
   end
 end
 
 defmodule AF.Server do
   use GenServer
   require Logger
+
+  @name AF.Server
   
-  def start_link(opts \\ []) do
-    args = opts
-    GenServer.start_link(__MODULE__, args, opts)
+  def start_link(args \\ []) do
+    GenServer.start_link(__MODULE__, args, name: @name)
   end
 
   @doc """
@@ -21,21 +23,22 @@ defmodule AF.Server do
   def init(args) do
     Logger.debug "AF.Server started with args:\n#{inspect args, [pretty: true]}"
 
-    { :ok, watcher } = FileWatcher.start_link([])
+    FileWatcher.start_link
 
     folders = Keyword.get(args, :folders, []) 
     for f <- folders do
-      :ok = start_watching(watcher, f.folder, f.flags, &on_new_files(&1, f.command) )
+      :ok = start_watching(f, &on_new_files(&1, f) )
     end
 
-    { :ok, %{ :folders => folders, :watcher => watcher } }
+    { :ok, %{ :folders => folders } }
   end
 
   @doc """
   Adds a folder to the list of folders currently being monitored.
   """
-  def watch(server, path, command, flags) do
-    GenServer.call(server, {:watch_folder, path: path, command: command, flags: flags})
+  def watch(server, path, command, args \\ [], flags \\ []) do
+    GenServer.call(server, {:watch_folder, path: path, command: command,
+      args: args, flags: flags})
   end
   
   @doc """
@@ -49,15 +52,15 @@ defmodule AF.Server do
     Logger.info "New files found: #{inspect files}"
     for f <- files do
       spawn fn -> 
-        AF.Utils.act(f, af.command, AF.Config.default_path |> Path.dirname)
+        AF.Utils.act(f, af.command, af.args, AF.Config.default_path |> Path.dirname)
       end
     end
   end
 
-  defp start_watching(watcher, path, flags, callback) do
-    folders = get_action_folders(path, flags)
-    for f <- folders do
-      {:ok, _} = FileWatcher.watch_folder(watcher, f, flags, callback)
+  defp start_watching(folder, callback) do
+    dirs = dirs_for_folder(folder)
+    for f <- dirs do
+      {:ok, _} = FileWatcher.watch_folder(FileWatcher, f, folder.flags, callback)
     end
     :ok
   end
@@ -72,12 +75,13 @@ defmodule AF.Server do
   def handle_call({:watch_folder, 
     path: path,
     command: command,
+    args: args,
     flags: flags}, _from, state) 
   do
     IO.inspect state
-    :ok = start_watching(state.watcher, path, flags, &on_new_files(&1, command) )
 
-    new_folder = %AF.Folder{folder: path, command: command, flags: flags}
+    new_folder = %AF.Folder{folder: path, command: command, args: args, flags: flags}
+    :ok = start_watching(new_folder, &on_new_files(&1, command) )
     new_state = %{state | :folders => [new_folder | state.folders] }
     {:reply, path, new_state}
   end
@@ -87,20 +91,17 @@ defmodule AF.Server do
   Searches all subfolders.
   """
   def handle_call(:list_action_folders, _from, state) do
-
-    list_af_folders = fn folder -> 
-      get_action_folders(folder.path, AF.Folder.recursive?(folder)) 
-    end
-    
-    folders = Enum.map(state.folders, list_af_folders) |> List.flatten
-    
-    {:reply, folders, state}
+    {:reply, state.folders, state}
   end
   
   # Helper method for get_action_folders. Just lists all folders,
   # including sub folders in a directory.
   # The returned list is not automatically flattened, so there could
   # be nested lists
+
+  def dirs_for_folder(folder) do
+    get_directories(folder.folder, AF.Folder.recursive?(folder))
+  end
 
   defp get_directories(path, recursive) when recursive==false do
     [ path ]
@@ -117,14 +118,6 @@ defmodule AF.Server do
     |> Enum.map(&get_directories(&1, recursive))
 
     here ++ subfolders
-  end
-  
-  
-  @doc """
-  Can call on any directory to get the list of action folders
-  """
-  def get_action_folders(path, flags) do
-    get_directories(path, Keyword.fetch!(flags, :recursive))
   end
   
 end

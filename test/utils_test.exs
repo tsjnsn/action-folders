@@ -1,34 +1,28 @@
-defmodule AF.ActionsTest do
+defmodule AF.UtilsTest do
   use ExUnit.Case
   
-  @base_folder "ActionFoldersTestDir"
-  @sample_command_unix Path.expand("#{@base_folder}/sample script.exs")
-  @sample_script_relative_unix "#{@base_folder}/sample script.exs"
-  @sample_script_win Path.expand("#{@base_folder}/sample script.bat")
-  @sample_script_relative_win "#{@base_folder}/sample script.bat"
-  @sample_file "#{@base_folder}/sample.file"
-  @sample_newfile_in_actionfolder "#{@base_folder}/testfolder.act/add_test.file"
+  @base_dir "ActionFoldersTestDir"
+  @file Path.join(@base_dir, "sample.file")
+  @script_name_win "sample script.bat"
+  @script_name_unix "sample script.exs"
+  
+  defp script_name do
+    case :os.type do
+      {:win32, _} -> @script_name_win
+      {:unix, _} -> @script_name_unix
+    end
+  end
+
+  defp args do
+    [ script_name ]
+  end
   
   test "can call an action" do
-    script =
-    case :os.type do
-      {:win32, _} -> @sample_script_win
-      {:unix, _} -> @sample_script_unix
-    end
-    
-    assert {:ok, _} = AF.Actions.act(@sample_file, )
+    assert {:ok, _} = AF.Utils.act("ActionFoldersTestDir/sample.file", "elixir", args, @base_dir)
   end
   
-  test "can call an action on relatively path'd script" do
-    # call action on file
-    # check if file was changed appropriately
-    script =
-    case :os.type do
-      {:win32, _} -> @sample_script_relative_win
-      {:unix, _} -> @sample_script_relative_unix
-    end
-    
-    assert {:ok, _} = AF.Actions.act_on_file(script, @sample_file)
-  end
+  #test "can call an action on relatively path'd script" do
+    #  assert {:ok, _} = AF.Utils.act(@file, @command_relative, @base_dir)
+    #end
   
 end

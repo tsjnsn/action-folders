@@ -4,13 +4,14 @@ defmodule AF.Config do
     strict: [
       folder: :string,
       command: :string,
+      args: :string,
       recursive: :boolean,
       allow_hidden: :boolean,
       allow_dir: :boolean
     ],
     aliases: [
       f: :folder,
-      c: :command,
+      cmd: :command,
       r: :recursive,
       a: :allow_hidden,
       d: :allow_dir
@@ -36,16 +37,17 @@ defmodule AF.Config do
       { parsed, argv, _errors } = OptionParser.parse(OptionParser.split(line), @parse_opts)
      
       case argv do
-        [ "watch" ] ->
+        [ "action" | rest ] when not is_nil rest ->
           folder = Keyword.fetch!(parsed, :folder) |> Path.expand(relative_to)
-          command = Keyword.fetch!(parsed, :command)
+          [ command | args ] = rest
+          args = for x <- args, do: x |> String.lstrip(?") |> String.rstrip(?")
 
           r = Keyword.get(parsed, :recursive, false)
           a = Keyword.get(parsed, :allow_hidden, false)
           d = Keyword.get(parsed, :allow_dir, false)
 
           flags = [ recursive: r, allow_hidden: a, allow_dir: d ]
-          %AF.Folder{folder: folder, command: command, flags: flags}
+          %AF.Folder{folder: folder, command: command, args: args, flags: flags}
         _ -> nil
       end
       

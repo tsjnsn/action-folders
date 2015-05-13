@@ -5,17 +5,15 @@ defmodule AF.Utils do
   Then executes the script as a command to which the filename is passed
   as an argument.
   """
-  def act(filename, command, cd) do
+  def act(filename, command, args, cd) do
     fullfilename = filename |> Path.expand
 
-    [cmd | cmdargs] = String.split command
-    cmdargs = for c <- cmdargs, do: Path.expand(c, cd)
+    args = for c <- args do Path.expand(c, cd) end
+      |> Enum.concat [fullfilename]
 
-    args = cmdargs ++ [ fullfilename ]
-
-    IO.inspect [command: cmd, arguments: args]
+    IO.inspect [command: command, args: args]
    
-    case System.cmd(cmd, args, [cd: cd]) do
+    case System.cmd(command, args, [cd: cd]) do
       {output, 0} -> {:ok, output}
       {output, err} -> {:error, output, err}
     end
