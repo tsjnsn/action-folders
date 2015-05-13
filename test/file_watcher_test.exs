@@ -1,5 +1,5 @@
 defmodule FileWatcherTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   
   @testfolder "ActionFoldersTestDir/testfolder.act"
   @tmp "ActionFoldersTestDir/testfolder.act/temp"
@@ -13,7 +13,7 @@ defmodule FileWatcherTest do
   
   setup do
     # start the watcher server and pass state back
-    { :ok, watcher } = GenServer.start_link(FileWatcher, nil)
+    { :ok, watcher } = GenServer.start_link(FileWatcher, :ok)
     { :ok, watcher: watcher }
   end
   

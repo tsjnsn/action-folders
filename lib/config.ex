@@ -40,7 +40,20 @@ defmodule AF.Config do
         [ "action" | rest ] when not is_nil rest ->
           folder = Keyword.fetch!(parsed, :folder) |> Path.expand(relative_to)
           [ command | args ] = rest
-          args = for x <- args, do: x |> String.lstrip(?") |> String.rstrip(?")
+          
+          args = for x <- args do
+            case x do
+              "$file" -> [:file]
+              _ -> x |> Path.expand(relative_to)
+                     |> Path.wildcard
+            end
+          end
+            |> List.flatten
+
+          args = case :file in args do
+            true -> args
+            _ -> args ++ [:file]
+          end
 
           r = Keyword.get(parsed, :recursive, false)
           a = Keyword.get(parsed, :allow_hidden, false)
